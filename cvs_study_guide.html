@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CVS – Cardiovascular System | Scrutiny Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sky: #b8dff0;
+    --sky-light: #e8f6fd;
+    --sky-deep: #5baacc;
+    --navy: #1a3550;
+    --accent: #e85d4a;
+    --accent-soft: #fdecea;
+    --gold: #f0a500;
+    --gold-soft: #fff8e6;
+    --green: #2ecc89;
+    --green-soft: #e6faf3;
+    --white: #ffffff;
+    --cream: #fafcff;
+    --text: #1c2e3e;
+    --text-muted: #5a7080;
+    --border: #d0e8f5;
+    --shadow: 0 4px 24px rgba(26,53,80,0.10);
+    --shadow-lg: 0 12px 48px rgba(26,53,80,0.16);
+    --radius: 18px;
+    --radius-sm: 10px;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, #1a3550 0%, #2a5580 60%, #1a7fa0 100%);
+    color: white;
+    padding: 48px 24px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 70% 20%, rgba(184,223,240,0.18) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 60% at 20% 80%, rgba(91,170,204,0.12) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .header-inner { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; }
+
+  .logo-wrap {
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    background: var(--sky-light);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 20px;
+    box-shadow: 0 0 0 6px rgba(184,223,240,0.3), 0 8px 32px rgba(0,0,0,0.25);
+    overflow: hidden;
+  }
+  .logo-wrap img { width: 90px; height: 90px; object-fit: cover; border-radius: 50%; }
+
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+  header h1 span { color: var(--sky); }
+  header p.subtitle {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.78);
+    font-weight: 300;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .badge-row {
+    display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;
+    margin-top: 22px;
+  }
+  .badge {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.22);
+    color: #fff;
+    padding: 5px 16px;
+    border-radius: 30px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    backdrop-filter: blur(4px);
+  }
+
+  /* ── NAV TABS ── */
+  nav.tabs {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--white);
+    border-bottom: 2px solid var(--border);
+    display: flex; justify-content: center; gap: 4px;
+    padding: 0 16px;
+    box-shadow: 0 2px 12px rgba(26,53,80,0.07);
+  }
+  nav.tabs button {
+    border: none; background: none; cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem; font-weight: 500;
+    color: var(--text-muted);
+    padding: 16px 20px;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  nav.tabs button:hover { color: var(--navy); }
+  nav.tabs button.active {
+    color: var(--navy);
+    border-bottom-color: var(--sky-deep);
+    font-weight: 600;
+  }
+
+  /* ── SECTIONS ── */
+  .section { display: none; padding: 40px 16px 60px; max-width: 900px; margin: 0 auto; }
+  .section.active { display: block; }
+
+  /* ── SECTION TITLE ── */
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.9rem;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .section-desc { color: var(--text-muted); margin-bottom: 32px; font-size: 0.95rem; }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px 32px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+
+  .card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--navy);
+    margin-bottom: 10px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .icon-badge {
+    width: 34px; height: 34px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0;
+  }
+  .icon-badge.red { background: var(--accent-soft); }
+  .icon-badge.blue { background: var(--sky-light); }
+  .icon-badge.gold { background: var(--gold-soft); }
+  .icon-badge.green { background: var(--green-soft); }
+
+  .card p { color: var(--text-muted); font-size: 0.95rem; }
+
+  .highlight-box {
+    background: var(--sky-light);
+    border-left: 4px solid var(--sky-deep);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 14px 18px;
+    margin: 14px 0;
+    font-size: 0.93rem;
+    color: var(--navy);
+  }
+  .warn-box {
+    background: #fff8e6;
+    border-left: 4px solid var(--gold);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 14px 18px;
+    margin: 14px 0;
+    font-size: 0.93rem;
+    color: #6b4800;
+  }
+
+  /* ── ANATOMY DIAGRAM ── */
+  .heart-diagram {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    margin-bottom: 24px;
+  }
+  .heart-diagram svg { max-width: 420px; width: 100%; }
+
+  /* ── FLOW CHART ── */
+  .flow {
+    display: flex; flex-direction: column; gap: 0;
+    margin: 20px 0;
+  }
+  .flow-step {
+    display: flex; align-items: flex-start; gap: 16px;
+    padding: 14px 0;
+  }
+  .flow-num {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--navy); color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 0.85rem; flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(26,53,80,0.3);
+  }
+  .flow-content strong { display: block; font-weight: 600; color: var(--navy); font-size: 0.95rem; }
+  .flow-content span { font-size: 0.87rem; color: var(--text-muted); }
+  .flow-arrow {
+    width: 2px; background: var(--border);
+    height: 16px; margin-left: 17px;
+  }
+
+  /* ── TABLE ── */
+  table {
+    width: 100%; border-collapse: collapse;
+    font-size: 0.9rem; margin: 12px 0;
+  }
+  th {
+    background: var(--navy);
+    color: white;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 500;
+  }
+  th:first-child { border-radius: 8px 0 0 0; }
+  th:last-child  { border-radius: 0 8px 0 0; }
+  td { padding: 11px 16px; border-bottom: 1px solid var(--border); }
+  tr:nth-child(even) td { background: var(--sky-light); }
+  tr:last-child td:first-child { border-radius: 0 0 0 8px; }
+  tr:last-child td:last-child  { border-radius: 0 0 8px 0; }
+
+  /* ── FLASHCARDS ── */
+  .flashcard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 8px;
+  }
+  .flashcard {
+    height: 200px;
+    perspective: 1000px;
+    cursor: pointer;
+  }
+  .flashcard-inner {
+    position: relative;
+    width: 100%; height: 100%;
+    transition: transform 0.55s cubic-bezier(.4,0,.2,1);
+    transform-style: preserve-3d;
+  }
+  .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+
+  .flashcard-front, .flashcard-back {
+    position: absolute; inset: 0;
+    border-radius: var(--radius);
+    display: flex; align-items: center; justify-content: center;
+    padding: 22px;
+    text-align: center;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  .flashcard-front {
+    background: linear-gradient(135deg, var(--navy) 0%, #2a5580 100%);
+    color: white;
+    box-shadow: var(--shadow);
+    flex-direction: column; gap: 10px;
+  }
+  .flashcard-front .fc-label {
+    font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase;
+    color: rgba(255,255,255,0.5); font-weight: 500;
+  }
+  .flashcard-front .fc-q {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    line-height: 1.4;
+  }
+  .flashcard-front .fc-tap {
+    font-size: 0.72rem; color: rgba(255,255,255,0.4);
+    margin-top: 6px;
+  }
+  .flashcard-back {
+    background: linear-gradient(135deg, var(--sky-deep) 0%, #3a8fb0 100%);
+    color: white;
+    transform: rotateY(180deg);
+    flex-direction: column; gap: 8px;
+    box-shadow: var(--shadow);
+  }
+  .flashcard-back .fc-a {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  .flashcard-back .fc-label {
+    font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase;
+    color: rgba(255,255,255,0.55); font-weight: 500;
+  }
+
+  .fc-tip {
+    text-align: center; color: var(--text-muted);
+    font-size: 0.82rem; margin-bottom: 16px;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+
+  /* ── QUIZ ── */
+  #quiz-section .q-block {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px 30px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow);
+    transition: border-color 0.3s;
+  }
+  .q-num {
+    font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--sky-deep); font-weight: 600; margin-bottom: 8px;
+  }
+  .q-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem; color: var(--navy);
+    margin-bottom: 18px; line-height: 1.5;
+  }
+  .options { display: flex; flex-direction: column; gap: 10px; }
+  .opt {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 16px;
+    border: 2px solid var(--border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.18s;
+    font-size: 0.92rem;
+    background: var(--white);
+    user-select: none;
+  }
+  .opt:hover { border-color: var(--sky-deep); background: var(--sky-light); }
+  .opt .opt-letter {
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--sky-light);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 0.78rem;
+    color: var(--navy); flex-shrink: 0;
+    transition: all 0.18s;
+  }
+  .opt.correct { border-color: var(--green); background: var(--green-soft); }
+  .opt.correct .opt-letter { background: var(--green); color: white; }
+  .opt.wrong { border-color: var(--accent); background: var(--accent-soft); }
+  .opt.wrong .opt-letter { background: var(--accent); color: white; }
+  .opt.disabled { pointer-events: none; }
+  .explanation {
+    margin-top: 14px;
+    padding: 12px 16px;
+    background: var(--sky-light);
+    border-radius: var(--radius-sm);
+    font-size: 0.88rem;
+    color: var(--navy);
+    display: none;
+  }
+  .explanation.show { display: block; }
+
+  #quiz-score {
+    display: none;
+    background: linear-gradient(135deg, var(--navy), #2a5580);
+    color: white; border-radius: var(--radius);
+    padding: 36px; text-align: center;
+    box-shadow: var(--shadow-lg);
+    margin-bottom: 24px;
+  }
+  #quiz-score h2 { font-family:'Playfair Display',serif; font-size:2rem; margin-bottom: 8px; }
+  #quiz-score p { color: rgba(255,255,255,0.7); margin-bottom: 20px; }
+  .score-num { font-size: 3.5rem; font-weight: 700; color: var(--sky); line-height: 1; }
+
+  .btn {
+    display: inline-block;
+    padding: 13px 30px;
+    border-radius: 30px;
+    border: none; cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem; font-weight: 600;
+    transition: all 0.2s;
+  }
+  .btn-primary {
+    background: var(--navy); color: white;
+    box-shadow: 0 4px 16px rgba(26,53,80,0.3);
+  }
+  .btn-primary:hover { background: #2a5580; transform: translateY(-1px); }
+  .btn-outline {
+    background: transparent; color: var(--navy);
+    border: 2px solid var(--navy);
+  }
+  .btn-outline:hover { background: var(--navy); color: white; }
+
+  /* ── MNEMONIC CARDS ── */
+  .mnemonic-card {
+    background: linear-gradient(135deg, #fef9ec, #fff4d4);
+    border: 1px solid #fce5a0;
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    margin-bottom: 18px;
+    box-shadow: 0 2px 12px rgba(240,165,0,0.1);
+  }
+  .mnemonic-card h4 {
+    font-family: 'Playfair Display', serif;
+    color: #8a5500; font-size: 1rem; margin-bottom: 10px;
+    display: flex; gap: 8px; align-items: center;
+  }
+  .mnemonic-letters { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+  .mnemonic-row { display: flex; gap: 10px; align-items: baseline; font-size: 0.9rem; }
+  .mnemonic-row strong { color: var(--accent); font-size: 1.1rem; width: 14px; flex-shrink:0; }
+  .mnemonic-row span { color: #5a4a30; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.65);
+    text-align: center;
+    padding: 40px 20px 32px;
+    font-size: 0.88rem;
+  }
+  footer .logo-sm {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: var(--sky-light);
+    margin: 0 auto 16px;
+    overflow: hidden;
+    box-shadow: 0 0 0 3px rgba(184,223,240,0.3);
+  }
+  footer .logo-sm img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+  footer .love { color: var(--accent); font-size: 1rem; }
+  footer a { color: var(--sky); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  footer .footer-name { font-family:'Playfair Display',serif; color:white; font-size:1.05rem; margin-bottom:4px; }
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:600px){
+    nav.tabs button { padding: 14px 12px; font-size:0.82rem; }
+    .card { padding: 20px 18px; }
+    .section { padding: 28px 12px 50px; }
+    .flashcard-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media(max-width:420px){
+    .flashcard-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── HEARTBEAT ANIMATION ── */
+  @keyframes heartbeat {
+    0%,100% { transform: scale(1); }
+    14% { transform: scale(1.15); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.08); }
+    70% { transform: scale(1); }
+  }
+  .heartbeat { display: inline-block; animation: heartbeat 1.6s ease-in-out infinite; }
+
+  /* grid 2col */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media(max-width:600px){ .grid-2 { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="logo-wrap">
+      <!-- Inline SVG fallback that mirrors the logo style -->
+      <svg viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="45" cy="45" r="45" fill="#b8dff0"/>
+        <text x="45" y="38" text-anchor="middle" font-family="Georgia,serif" font-size="22" font-weight="700" fill="#1a1a1a">S<tspan font-size="18">A</tspan></text>
+        <text x="45" y="62" text-anchor="middle" font-family="Georgia,serif" font-size="9" font-style="italic" fill="#1a1a1a">Scrutiny academy</text>
+      </svg>
+    </div>
+    <h1><span class="heartbeat">❤️</span> <span>CVS</span> — Cardiovascular System</h1>
+    <p class="subtitle">A complete, easy-to-understand guide for MBBS students — from basics to clinical pearls</p>
+    <div class="badge-row">
+      <span class="badge">📚 MBBS Phase I &amp; II</span>
+      <span class="badge">🎴 Flashcards</span>
+      <span class="badge">🧠 Quiz</span>
+      <span class="badge">💡 Mnemonics</span>
+      <span class="badge">🩺 Clinical Notes</span>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="tabs">
+  <button class="active" onclick="showSection('basics',this)">🫀 Basics</button>
+  <button onclick="showSection('physiology',this)">⚡ Physiology</button>
+  <button onclick="showSection('ecg',this)">📈 ECG &amp; Sounds</button>
+  <button onclick="showSection('mnemonics',this)">💡 Mnemonics</button>
+  <button onclick="showSection('flashcards',this)">🎴 Flashcards</button>
+  <button onclick="showSection('quiz',this)">🧠 Quiz</button>
+</nav>
+
+<!-- ═══════════════════════════════════════════ BASICS ═══════════════════════ -->
+<section class="section active" id="basics">
+  <h2 class="section-title">🫀 The Cardiovascular System — Simply Put</h2>
+  <p class="section-desc">Think of the heart as a powerful pump that never stops working — not even for a second!</p>
+
+  <div class="card">
+    <h3><span class="icon-badge red">❤️</span> What is the CVS?</h3>
+    <p>The <strong>Cardiovascular System (CVS)</strong> = Heart + Blood Vessels (Arteries, Veins, Capillaries). Its job is simple: <strong>deliver oxygen &amp; nutrients</strong> to every cell and <strong>carry away waste</strong> (CO₂, urea).</p>
+    <div class="highlight-box">🌟 <strong>Simple analogy:</strong> Imagine your body is a city. The <strong>heart</strong> is the water pump, <strong>arteries</strong> are the supply pipes, <strong>veins</strong> are the drainage pipes, and <strong>capillaries</strong> are the tiny lanes connecting every house (cell).</div>
+  </div>
+
+  <div class="heart-diagram">
+    <svg viewBox="0 0 420 340" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans,sans-serif">
+      <!-- Body outline -->
+      <rect x="10" y="10" width="400" height="320" rx="16" fill="#e8f6fd" stroke="#b8dff0" stroke-width="1.5"/>
+
+      <!-- Heart body -->
+      <ellipse cx="210" cy="170" rx="80" ry="90" fill="#fdecea" stroke="#e85d4a" stroke-width="2"/>
+
+      <!-- Septum -->
+      <line x1="210" y1="95" x2="210" y2="250" stroke="#e85d4a" stroke-width="2" stroke-dasharray="5,4"/>
+
+      <!-- Chambers -->
+      <text x="178" y="145" fill="#c0392b" font-size="12" font-weight="600">RA</text>
+      <text x="218" y="145" fill="#c0392b" font-size="12" font-weight="600">LA</text>
+      <text x="178" y="205" fill="#1a3550" font-size="12" font-weight="600">RV</text>
+      <text x="218" y="205" fill="#1a3550" font-size="12" font-weight="600">LV</text>
+
+      <!-- AV valves -->
+      <text x="185" y="172" fill="#888" font-size="9">Tricuspid</text>
+      <text x="213" y="172" fill="#888" font-size="9">Mitral</text>
+      <line x1="210" y1="160" x2="210" y2="185" stroke="#ccc" stroke-width="1"/>
+
+      <!-- Aorta -->
+      <path d="M230,100 Q260,60 260,30" stroke="#e85d4a" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <text x="264" y="28" fill="#c0392b" font-size="11" font-weight="600">Aorta</text>
+
+      <!-- Pulmonary artery -->
+      <path d="M190,100 Q160,60 140,28" stroke="#5baacc" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <text x="80" y="26" fill="#1a7fa0" font-size="11" font-weight="600">Pulm. Artery</text>
+
+      <!-- SVC -->
+      <path d="M200,95 Q200,60 200,28" stroke="#5baacc" stroke-width="3" fill="none" stroke-dasharray="5,3"/>
+      <text x="202" y="24" fill="#1a7fa0" font-size="10">SVC</text>
+
+      <!-- IVC -->
+      <path d="M200,255 Q200,290 200,315" stroke="#5baacc" stroke-width="3" fill="none" stroke-dasharray="5,3"/>
+      <text x="202" y="326" fill="#1a7fa0" font-size="10">IVC</text>
+
+      <!-- Pulm veins -->
+      <path d="M270,140 Q310,130 340,120" stroke="#e85d4a" stroke-width="3" fill="none" stroke-dasharray="5,3"/>
+      <text x="342" y="118" fill="#c0392b" font-size="10">Pulm. Veins</text>
+
+      <!-- Labels -->
+      <text x="210" y="300" text-anchor="middle" fill="#1a3550" font-size="11" font-weight="500">Heart — 4 Chambers</text>
+
+      <!-- Legend -->
+      <rect x="20" y="295" width="12" height="4" rx="2" fill="#e85d4a"/>
+      <text x="36" y="300" fill="#555" font-size="10">Oxygenated blood</text>
+      <rect x="20" y="308" width="12" height="4" rx="2" fill="#5baacc"/>
+      <text x="36" y="313" fill="#555" font-size="10">Deoxygenated blood</text>
+    </svg>
+    <p style="font-size:0.82rem;color:var(--text-muted);margin-top:8px;">RA = Right Atrium | LA = Left Atrium | RV = Right Ventricle | LV = Left Ventricle</p>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3><span class="icon-badge blue">🩸</span> Blood Circuits</h3>
+      <p><strong>Pulmonary Circuit:</strong><br>Heart → Lungs → Heart<br><em>(for oxygenation)</em></p>
+      <br>
+      <p><strong>Systemic Circuit:</strong><br>Heart → Body → Heart<br><em>(for delivering O₂)</em></p>
+      <div class="highlight-box">💡 Right side pumps <strong>deoxygenated</strong> blood to lungs. Left side pumps <strong>oxygenated</strong> blood to body.</div>
+    </div>
+    <div class="card">
+      <h3><span class="icon-badge gold">🫁</span> Blood Vessels</h3>
+      <table>
+        <tr><th>Vessel</th><th>Key Feature</th></tr>
+        <tr><td>Arteries</td><td>Carry blood AWAY from heart; thick wall</td></tr>
+        <tr><td>Veins</td><td>Carry blood TO heart; valves present</td></tr>
+        <tr><td>Capillaries</td><td>Exchange of gases &amp; nutrients; 1 cell thick</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon-badge green">🔄</span> Blood Flow — Step by Step</h3>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-num">1</div>
+        <div class="flow-content"><strong>Deoxygenated blood from body</strong><span>Enters Right Atrium via SVC &amp; IVC</span></div>
+      </div>
+      <div class="flow-arrow"></div>
+      <div class="flow-step">
+        <div class="flow-num">2</div>
+        <div class="flow-content"><strong>Right Atrium → Right Ventricle</strong><span>Through Tricuspid valve (3 cusps = Tri)</span></div>
+      </div>
+      <div class="flow-arrow"></div>
+      <div class="flow-step">
+        <div class="flow-num">3</div>
+        <div class="flow-content"><strong>Right Ventricle → Pulmonary Artery</strong><span>Through Pulmonary valve → to Lungs</span></div>
+      </div>
+      <div class="flow-arrow"></div>
+      <div class="flow-step">
+        <div class="flow-num">4</div>
+        <div class="flow-content"><strong>Lungs: Oxygenation</strong><span>CO₂ out, O₂ in — blood becomes red &amp; fresh</span></div>
+      </div>
+      <div class="flow-arrow"></div>
+      <div class="flow-step">
+        <div class="flow-num">5</div>
+        <div class="flow-content"><strong>Pulmonary Veins → Left Atrium</strong><span>Only veins carrying oxygenated blood!</span></div>
+      </div>
+      <div class="flow-arrow"></div>
+      <div class="flow-step">
+        <div class="flow-num">6</div>
+        <div class="flow-content"><strong>Left Atrium → Left Ventricle</strong><span>Through Mitral/Bicuspid valve (2 cusps = Bi)</span></div>
+      </div>
+      <div class="flow-arrow"></div>
+      <div class="flow-step">
+        <div class="flow-num">7</div>
+        <div class="flow-content"><strong>Left Ventricle → Aorta → Body</strong><span>Through Aortic valve — systemic circulation begins!</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon-badge red">🚪</span> Heart Valves — Easy Way to Remember</h3>
+    <table>
+      <tr><th>Valve</th><th>Location</th><th>Cusps</th><th>Sound</th></tr>
+      <tr><td>Tricuspid</td><td>RA → RV</td><td>3</td><td>S1 (Lub)</td></tr>
+      <tr><td>Pulmonary</td><td>RV → Pulm. Artery</td><td>3</td><td>S2 (Dub)</td></tr>
+      <tr><td>Mitral (Bicuspid)</td><td>LA → LV</td><td>2</td><td>S1 (Lub)</td></tr>
+      <tr><td>Aortic</td><td>LV → Aorta</td><td>3</td><td>S2 (Dub)</td></tr>
+    </table>
+    <div class="warn-box">⚠️ <strong>Exam Alert:</strong> Mitral valve has only <strong>2</strong> cusps (all others have 3). Mitral stenosis = most common rheumatic valve disease!</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ PHYSIOLOGY ════════════════════ -->
+<section class="section" id="physiology">
+  <h2 class="section-title">⚡ Heart Physiology</h2>
+  <p class="section-desc">How the heart beats, pumps, and regulates itself — made simple.</p>
+
+  <div class="card">
+    <h3><span class="icon-badge blue">⚡</span> Cardiac Action Potential — The Electrical Story</h3>
+    <p>The heart generates its own electricity. This is called <strong>automaticity</strong> or <strong>autorhythmicity</strong>.</p>
+    <div class="highlight-box">
+      📍 <strong>Pacemaker of the heart = SA Node</strong> (Sinoatrial Node) — located in right atrium<br>
+      Rate: 60–100 bpm | Inherent rate without any nerve input = 100 bpm<br>
+      Vagal tone normally slows it to 60–100 bpm
+    </div>
+    <br>
+    <p><strong>Conduction pathway (think of electricity spreading):</strong></p>
+    <div class="flow">
+      <div class="flow-step"><div class="flow-num">→</div><div class="flow-content"><strong>SA Node</strong><span>Generates impulse (pacemaker)</span></div></div>
+      <div class="flow-arrow"></div>
+      <div class="flow-step"><div class="flow-num">→</div><div class="flow-content"><strong>AV Node</strong><span>Delays impulse (0.1 sec) — gives atria time to fill ventricles</span></div></div>
+      <div class="flow-arrow"></div>
+      <div class="flow-step"><div class="flow-num">→</div><div class="flow-content"><strong>Bundle of His</strong><span>Single pathway down the septum</span></div></div>
+      <div class="flow-arrow"></div>
+      <div class="flow-step"><div class="flow-num">→</div><div class="flow-content"><strong>Left &amp; Right Bundle Branches</strong><span>Spreads to both ventricles</span></div></div>
+      <div class="flow-arrow"></div>
+      <div class="flow-step"><div class="flow-num">→</div><div class="flow-content"><strong>Purkinje Fibers</strong><span>Final delivery to ventricular muscle → contraction!</span></div></div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3><span class="icon-badge gold">💓</span> Cardiac Cycle</h3>
+      <p>One complete heartbeat = <strong>Systole + Diastole</strong></p>
+      <br>
+      <p>🔴 <strong>Systole</strong> = Ventricles contract → blood ejected<br>Duration: ~0.3 sec</p>
+      <br>
+      <p>🔵 <strong>Diastole</strong> = Ventricles relax → blood fills in<br>Duration: ~0.5 sec</p>
+      <div class="highlight-box">Total cycle = 0.8 sec at 75 bpm<br>💡 Diastole is <strong>longer</strong> than systole — heart rests more!</div>
+    </div>
+    <div class="card">
+      <h3><span class="icon-badge green">📊</span> Key Numbers to Know</h3>
+      <table>
+        <tr><th>Parameter</th><th>Value</th></tr>
+        <tr><td>Heart Rate</td><td>60–100 bpm</td></tr>
+        <tr><td>Stroke Volume</td><td>~70 mL</td></tr>
+        <tr><td>Cardiac Output</td><td>~5 L/min</td></tr>
+        <tr><td>Ejection Fraction</td><td>55–70%</td></tr>
+        <tr><td>BP (normal)</td><td>120/80 mmHg</td></tr>
+        <tr><td>Pulse Pressure</td><td>40 mmHg</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon-badge red">📐</span> Cardiac Output — The Big Formula</h3>
+    <div class="highlight-box" style="font-size:1.05rem; text-align:center;">
+      <strong>CO = Heart Rate × Stroke Volume</strong><br>
+      <span style="font-size:0.9rem;">5000 mL/min = 70 bpm × 70 mL</span>
+    </div>
+    <br>
+    <p><strong>Factors affecting Stroke Volume (Starling's Law):</strong></p>
+    <ul style="margin-left:20px; margin-top:10px; font-size:0.92rem; color:var(--text-muted); line-height:2;">
+      <li><strong>Preload</strong> ↑ → SV ↑ (more blood stretches ventricle → stronger contraction)</li>
+      <li><strong>Afterload</strong> ↑ → SV ↓ (more resistance = harder to eject)</li>
+      <li><strong>Contractility</strong> ↑ → SV ↑ (sympathetic stimulation, adrenaline)</li>
+    </ul>
+    <div class="warn-box">🎯 <strong>Frank-Starling Law:</strong> "The heart pumps out what comes in." More preload → more stretch → more force. Like a rubber band!</div>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon-badge blue">🧠</span> ANS Control of Heart</h3>
+    <div class="grid-2">
+      <div>
+        <p><strong>⬆️ Sympathetic (Fight or Flight)</strong></p>
+        <ul style="margin-left:16px; font-size:0.88rem; color:var(--text-muted); margin-top:6px; line-height:1.9;">
+          <li>↑ Heart Rate (positive chronotropy)</li>
+          <li>↑ Contractility (positive inotropy)</li>
+          <li>↑ Conduction (positive dromotropy)</li>
+          <li>Neurotransmitter: <strong>Noradrenaline</strong></li>
+        </ul>
+      </div>
+      <div>
+        <p><strong>⬇️ Parasympathetic (Rest &amp; Digest)</strong></p>
+        <ul style="margin-left:16px; font-size:0.88rem; color:var(--text-muted); margin-top:6px; line-height:1.9;">
+          <li>↓ Heart Rate (negative chronotropy)</li>
+          <li>↓ Contractility (negative inotropy)</li>
+          <li>↓ Conduction speed</li>
+          <li>Neurotransmitter: <strong>Acetylcholine</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ ECG ════════════════════════ -->
+<section class="section" id="ecg">
+  <h2 class="section-title">📈 ECG &amp; Heart Sounds</h2>
+  <p class="section-desc">Read the heart's electrical diary and listen to its music.</p>
+
+  <div class="card">
+    <h3><span class="icon-badge blue">📊</span> ECG Waves — What Each Means</h3>
+    <div class="heart-diagram">
+      <svg viewBox="0 0 420 180" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans,sans-serif">
+        <rect x="0" y="0" width="420" height="180" rx="12" fill="#e8f6fd"/>
+        <!-- Grid lines -->
+        <g stroke="#c8e8f5" stroke-width="0.8">
+          <line x1="0" y1="45" x2="420" y2="45"/>
+          <line x1="0" y1="90" x2="420" y2="90"/>
+          <line x1="0" y1="135" x2="420" y2="135"/>
+          <line x1="84" y1="0" x2="84" y2="180"/>
+          <line x1="168" y1="0" x2="168" y2="180"/>
+          <line x1="252" y1="0" x2="252" y2="180"/>
+          <line x1="336" y1="0" x2="336" y2="180"/>
+        </g>
+        <!-- Baseline -->
+        <line x1="10" y1="120" x2="410" y2="120" stroke="#aaa" stroke-width="1" stroke-dasharray="3,3"/>
+        <!-- ECG waveform -->
+        <polyline points="
+          30,120
+          50,120
+          60,105
+          70,120
+          85,120
+          120,50
+          130,120
+          140,155
+          165,120
+          200,120
+          220,90
+          240,90
+          260,120
+          295,120
+          310,110
+          325,120
+          360,120
+        " fill="none" stroke="#e85d4a" stroke-width="2.5" stroke-linejoin="round"/>
+        <!-- Labels -->
+        <text x="60" y="99" fill="#1a7fa0" font-size="12" font-weight="700">P</text>
+        <text x="119" y="44" fill="#1a7fa0" font-size="12" font-weight="700">R</text>
+        <text x="129" y="150" fill="#1a7fa0" font-size="12" font-weight="700">S</text>
+        <text x="140" y="170" fill="#888" font-size="9">QRS</text>
+        <text x="85" y="145" fill="#1a7fa0" font-size="12" font-weight="700">Q</text>
+        <text x="225" y="85" fill="#1a7fa0" font-size="12" font-weight="700">T</text>
+        <text x="312" y="106" fill="#1a7fa0" font-size="12" font-weight="700">U</text>
+        <!-- Interval labels -->
+        <line x1="50" y1="168" x2="165" y2="168" stroke="#5baacc" stroke-width="1.5"/>
+        <text x="95" y="179" fill="#1a7fa0" font-size="9" text-anchor="middle">PR interval</text>
+        <line x1="120" y1="158" x2="165" y2="158" stroke="#e85d4a" stroke-width="1.5"/>
+        <text x="142" y="150" fill="#c0392b" font-size="8" text-anchor="middle"></text>
+        <line x1="85" y1="162" x2="260" y2="162" stroke="#888" stroke-width="1" stroke-dasharray="3,2"/>
+        <text x="172" y="156" fill="#555" font-size="8" text-anchor="middle">QT interval</text>
+      </svg>
+    </div>
+    <table>
+      <tr><th>Wave/Segment</th><th>What it represents</th><th>Normal duration</th></tr>
+      <tr><td><strong>P wave</strong></td><td>Atrial depolarization (SA node fires → atria contract)</td><td>&lt; 0.12 sec</td></tr>
+      <tr><td><strong>PR interval</strong></td><td>AV node delay (atria → ventricles conduction)</td><td>0.12–0.20 sec</td></tr>
+      <tr><td><strong>QRS complex</strong></td><td>Ventricular depolarization (ventricles contract)</td><td>&lt; 0.12 sec</td></tr>
+      <tr><td><strong>ST segment</strong></td><td>Ventricular plateau (between depol &amp; repol)</td><td>Isoelectric</td></tr>
+      <tr><td><strong>T wave</strong></td><td>Ventricular repolarization (ventricles relax)</td><td>&lt; 0.20 sec</td></tr>
+      <tr><td><strong>U wave</strong></td><td>Purkinje fiber repolarization (seen in hypokalemia)</td><td>Rarely seen</td></tr>
+    </table>
+    <div class="warn-box">🔥 <strong>High Yield:</strong> ST elevation → MI (heart attack) | ST depression → Ischemia | No P wave → Atrial fibrillation | Wide QRS → Bundle Branch Block</div>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon-badge gold">🎵</span> Heart Sounds — Lub Dub Explained</h3>
+    <div class="grid-2">
+      <div>
+        <p><strong>S1 — "LUB" 🔊</strong></p>
+        <p style="font-size:0.88rem; color:var(--text-muted); margin-top:6px;">
+          Caused by closure of <strong>Mitral &amp; Tricuspid valves</strong> (AV valves)<br>
+          Marks beginning of <strong>Systole</strong><br>
+          Best heard: <strong>Apex</strong> (5th ICS, MCL)
+        </p>
+      </div>
+      <div>
+        <p><strong>S2 — "DUB" 🔊</strong></p>
+        <p style="font-size:0.88rem; color:var(--text-muted); margin-top:6px;">
+          Caused by closure of <strong>Aortic &amp; Pulmonary valves</strong> (Semilunar)<br>
+          Marks beginning of <strong>Diastole</strong><br>
+          Best heard: <strong>Base of heart</strong> (2nd ICS)
+        </p>
+      </div>
+    </div>
+    <div class="highlight-box">💡 <strong>Memory trick:</strong> S1 = "All" valves open → AV valves close (Mitral + Tricuspid)<br>S2 = Aortic + Pulmonary (Semilunar) valves close</div>
+    <br>
+    <table>
+      <tr><th>Extra Sound</th><th>When</th><th>Meaning</th></tr>
+      <tr><td>S3 "Ken-tuc-KY"</td><td>Early diastole</td><td>Ventricular gallop — Heart failure / young normal</td></tr>
+      <tr><td>S4 "TEN-nes-SEE"</td><td>Late diastole (pre-systolic)</td><td>Atrial gallop — Stiff ventricle (hypertension, HOCM)</td></tr>
+    </table>
+    <div class="warn-box">⚠️ <strong>S3 in adults</strong> → almost always pathological (Heart Failure). <strong>S3 in young</strong> (under 30) → may be normal!</div>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon-badge green">🩺</span> Auscultation Areas — Where to Place Stethoscope</h3>
+    <table>
+      <tr><th>Valve</th><th>Area</th><th>Location</th></tr>
+      <tr><td>Aortic</td><td>2nd Right ICS, Right Sternal Border</td><td>RSB at 2nd ICS</td></tr>
+      <tr><td>Pulmonary</td><td>2nd Left ICS, Left Sternal Border</td><td>LSB at 2nd ICS</td></tr>
+      <tr><td>Tricuspid</td><td>Lower Left Sternal Border</td><td>4th-5th ICS, LSB</td></tr>
+      <tr><td>Mitral</td><td>Apex / 5th ICS, MCL</td><td>Cardiac apex</td></tr>
+    </table>
+    <div class="highlight-box">🧠 Mnemonic: <strong>APT M</strong> → "All Patients Take Medicine" (Aortic, Pulmonary, Tricuspid, Mitral)</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ MNEMONICS ════════════════════ -->
+<section class="section" id="mnemonics">
+  <h2 class="section-title">💡 Mnemonics &amp; Memory Tricks</h2>
+  <p class="section-desc">Never forget important CVS facts again — memory hacks for the exam hall.</p>
+
+  <div class="mnemonic-card">
+    <h4>💡 Auscultation Areas — "All Patients Take Medicine"</h4>
+    <div class="mnemonic-letters">
+      <div class="mnemonic-row"><strong>A</strong><span>Aortic — 2nd Right ICS</span></div>
+      <div class="mnemonic-row"><strong>P</strong><span>Pulmonary — 2nd Left ICS</span></div>
+      <div class="mnemonic-row"><strong>T</strong><span>Tricuspid — 4th Left ICS</span></div>
+      <div class="mnemonic-row"><strong>M</strong><span>Mitral — 5th ICS MCL (Apex)</span></div>
+    </div>
+  </div>
+
+  <div class="mnemonic-card">
+    <h4>💡 Layers of the Heart Wall — "Every Muscle Endures"</h4>
+    <div class="mnemonic-letters">
+      <div class="mnemonic-row"><strong>E</strong><span>Epicardium — outer layer (visceral pericardium)</span></div>
+      <div class="mnemonic-row"><strong>M</strong><span>Myocardium — middle muscle layer (does the pumping!)</span></div>
+      <div class="mnemonic-row"><strong>E</strong><span>Endocardium — innermost lining (also lines valves)</span></div>
+    </div>
+  </div>
+
+  <div class="mnemonic-card">
+    <h4>💡 Pacemaker Hierarchy — "Some Big Punks Venture Fast"</h4>
+    <div class="mnemonic-letters">
+      <div class="mnemonic-row"><strong>SA</strong><span>SA Node — 60–100 bpm (fastest = pacemaker)</span></div>
+      <div class="mnemonic-row"><strong>AV</strong><span>AV Node — 40–60 bpm (escape rhythm if SA fails)</span></div>
+      <div class="mnemonic-row"><strong>B</strong><span>Bundle of His — 40 bpm</span></div>
+      <div class="mnemonic-row"><strong>P</strong><span>Purkinje Fibers — 20–40 bpm (last resort)</span></div>
+    </div>
+    <div class="highlight-box">💡 Each lower pacemaker is slower. If SA fails, AV takes over. If AV fails, bundle takes over — this is called <strong>escape rhythm</strong>.</div>
+  </div>
+
+  <div class="mnemonic-card">
+    <h4>💡 Branches of Aorta — "SAD PICA"</h4>
+    <div class="mnemonic-letters">
+      <div class="mnemonic-row"><strong>S</strong><span>Superior mesenteric artery</span></div>
+      <div class="mnemonic-row"><strong>A</strong><span>Adrenal (suprarenal) arteries</span></div>
+      <div class="mnemonic-row"><strong>D</strong><span>diaphragmatic (inferior phrenic)</span></div>
+      <div class="mnemonic-row"><strong>P</strong><span>Phrenic (inferior), Pericardial</span></div>
+      <div class="mnemonic-row"><strong>I</strong><span>Inferior mesenteric artery</span></div>
+      <div class="mnemonic-row"><strong>C</strong><span>Celiac trunk</span></div>
+      <div class="mnemonic-row"><strong>A</strong><span>renal Arteries + Gonadal</span></div>
+    </div>
+  </div>
+
+  <div class="mnemonic-card">
+    <h4>💡 ECG Intervals Normal Values — "Pretty Regular, Quick Study Time, Usually"</h4>
+    <div class="mnemonic-letters">
+      <div class="mnemonic-row"><strong>P</strong><span>P wave &lt;0.12 sec</span></div>
+      <div class="mnemonic-row"><strong>R</strong><span>PR interval 0.12–0.20 sec</span></div>
+      <div class="mnemonic-row"><strong>Q</strong><span>QRS &lt;0.12 sec</span></div>
+      <div class="mnemonic-row"><strong>S</strong><span>ST segment — isoelectric (flat)</span></div>
+      <div class="mnemonic-row"><strong>T</strong><span>T wave positive in most leads</span></div>
+      <div class="mnemonic-row"><strong>U</strong><span>U wave — hypoKalemia marker</span></div>
+    </div>
+  </div>
+
+  <div class="mnemonic-card">
+    <h4>💡 Heart Failure Signs — "FACES"</h4>
+    <div class="mnemonic-letters">
+      <div class="mnemonic-row"><strong>F</strong><span>Fatigue</span></div>
+      <div class="mnemonic-row"><strong>A</strong><span>Activity limitation</span></div>
+      <div class="mnemonic-row"><strong>C</strong><span>Congestion (pulmonary / peripheral)</span></div>
+      <div class="mnemonic-row"><strong>E</strong><span>Edema (ankle / pedal edema)</span></div>
+      <div class="mnemonic-row"><strong>S</strong><span>Shortness of breath (dyspnea)</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon-badge red">🔑</span> Quick Clinical Pearls</h3>
+    <table>
+      <tr><th>Condition</th><th>Key Feature</th><th>Remember</th></tr>
+      <tr><td>MI (Heart Attack)</td><td>ST elevation + troponin ↑</td><td>STEMI = emergency!</td></tr>
+      <tr><td>Heart Failure</td><td>S3 gallop + pitting edema</td><td>BNP elevated</td></tr>
+      <tr><td>Atrial Fibrillation</td><td>No P waves, irregular RR</td><td>Stroke risk → anticoagulate</td></tr>
+      <tr><td>Aortic Stenosis</td><td>Ejection systolic murmur</td><td>AS = "Angry Stenosis"</td></tr>
+      <tr><td>Mitral Stenosis</td><td>Mid-diastolic rumbling</td><td>Rheumatic fever history</td></tr>
+      <tr><td>Hypertension</td><td>BP &gt;140/90 mmHg</td><td>Silent killer</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ FLASHCARDS ════════════════════ -->
+<section class="section" id="flashcards">
+  <h2 class="section-title">🎴 Flashcards</h2>
+  <p class="section-desc">Tap any card to flip and reveal the answer. Great for last-minute revision!</p>
+  <p class="fc-tip">👆 Tap a card to flip it</p>
+
+  <div class="flashcard-grid" id="fc-grid"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════ QUIZ ════════════════════════ -->
+<section class="section" id="quiz">
+  <h2 class="section-title">🧠 CVS Quiz</h2>
+  <p class="section-desc">Test your knowledge! Choose an answer — instant feedback with explanation.</p>
+
+  <div id="quiz-score">
+    <div class="score-num" id="score-display">0/15</div>
+    <h2>Quiz Complete! 🎉</h2>
+    <p id="score-msg">See how you did!</p>
+    <button class="btn btn-outline" onclick="resetQuiz()" style="margin-top:10px;">🔄 Retake Quiz</button>
+  </div>
+
+  <div id="quiz-container"></div>
+
+  <div style="text-align:center; margin-top:20px;">
+    <button class="btn btn-primary" id="submit-btn" onclick="submitQuiz()">✅ Submit &amp; See Score</button>
+  </div>
+</section>
+
+<!-- ══════════════════════ FOOTER ══════════════════════ -->
+<footer>
+  <div class="logo-sm">
+    <svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="28" cy="28" r="28" fill="#b8dff0"/>
+      <text x="28" y="24" text-anchor="middle" font-family="Georgia,serif" font-size="14" font-weight="700" fill="#1a1a1a">S<tspan font-size="11">A</tspan></text>
+      <text x="28" y="38" text-anchor="middle" font-family="Georgia,serif" font-size="5.5" font-style="italic" fill="#1a1a1a">Scrutiny academy</text>
+    </svg>
+  </div>
+  <p style="color:white; font-size:1rem; margin-bottom:4px; font-family:'Playfair Display',serif;">Scrutiny Academy</p>
+  <p style="margin-bottom:16px;">Empowering Future Doctors, One Concept at a Time</p>
+  <p style="margin-bottom:6px;">Made with <span class="love">♥</span> lots of love by <strong style="color:white;">Pramod Sharma</strong></p>
+  <p><a href="mailto:scrutinyacademy@gmail.com">scrutinyacademy@gmail.com</a></p>
+  <p style="margin-top:20px; font-size:0.78rem; opacity:0.45;">© 2025 Scrutiny Academy. All rights reserved.</p>
+</footer>
+
+<script>
+// ── TAB NAVIGATION ──
+function showSection(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('nav.tabs button').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── FLASHCARD DATA ──
+const flashcards = [
+  { q: "What is the pacemaker of the heart?", a: "SA Node (Sinoatrial Node) — located in right atrium. Fires at 60–100 bpm." },
+  { q: "What does the QRS complex represent on ECG?", a: "Ventricular depolarization — the electrical signal that causes ventricles to contract." },
+  { q: "What is cardiac output formula?", a: "CO = Heart Rate × Stroke Volume. Normal = 70 × 70 = ~5 L/min." },
+  { q: "Which valve separates Left Atrium and Left Ventricle?", a: "Mitral (Bicuspid) valve — 2 cusps. Most commonly diseased in rheumatic fever." },
+  { q: "What does S1 (Lub) represent?", a: "Closure of AV valves — Mitral + Tricuspid. Marks the START of systole." },
+  { q: "What is Starling's Law of the Heart?", a: "More stretch (preload) → stronger contraction → more stroke volume. 'Heart pumps what comes in!'" },
+  { q: "Where is the best place to hear Mitral valve?", a: "Apex — 5th Intercostal Space, Midclavicular Line (MCL)." },
+  { q: "What does ST elevation on ECG indicate?", a: "Acute MI (Myocardial Infarction / Heart Attack). STEMI = medical emergency!" },
+  { q: "What is the normal PR interval on ECG?", a: "0.12 – 0.20 seconds. Prolonged PR = 1st degree Heart Block." },
+  { q: "What is the role of the AV node?", a: "Delays impulse by 0.1 sec to allow atria to empty into ventricles before they contract." },
+  { q: "Which arteries supply the heart muscle?", a: "Coronary arteries — Left (LAD + LCx) and Right Coronary Artery (RCA)." },
+  { q: "What is ejection fraction (EF)?", a: "% of blood ejected per beat. Normal = 55–70%. EF < 40% = Heart Failure." },
+  { q: "What causes S3 heart sound?", a: "Rapid ventricular filling. Pathological in adults → Heart Failure. Normal in young." },
+  { q: "What is the difference between arteries and veins?", a: "Arteries: carry blood AWAY from heart, thick wall, no valves. Veins: carry TO heart, thin wall, have valves." },
+  { q: "What is pulse pressure?", a: "Systolic BP – Diastolic BP = 120 – 80 = 40 mmHg (normal). Wide pulse pressure seen in aortic regurgitation." },
+  { q: "Which side of the heart pumps oxygenated blood?", a: "LEFT side — receives oxygenated blood from lungs via pulmonary veins → pumps to body via aorta." },
+  { q: "What is automaticity in the heart?", a: "The heart's ability to generate its own electrical impulse without external nervous input." },
+  { q: "What is the effect of vagal stimulation on heart?", a: "↓ HR, ↓ Conduction through AV node (negative chronotropy and dromotropy)." },
+];
+
+// Build flashcards
+const fcGrid = document.getElementById('fc-grid');
+flashcards.forEach((fc, i) => {
+  const div = document.createElement('div');
+  div.className = 'flashcard';
+  div.onclick = () => div.classList.toggle('flipped');
+  div.innerHTML = `
+    <div class="flashcard-inner">
+      <div class="flashcard-front">
+        <span class="fc-label">Question ${i+1}</span>
+        <span class="fc-q">${fc.q}</span>
+        <span class="fc-tap">Tap to reveal ↩</span>
+      </div>
+      <div class="flashcard-back">
+        <span class="fc-label">Answer</span>
+        <span class="fc-a">${fc.a}</span>
+      </div>
+    </div>`;
+  fcGrid.appendChild(div);
+});
+
+// ── QUIZ DATA ──
+const quizData = [
+  { q: "The normal resting heart rate in adults is:", opts:["40–60 bpm","60–100 bpm","80–120 bpm","50–90 bpm"], ans:1, exp:"Normal resting HR = 60–100 bpm. Below 60 = Bradycardia; Above 100 = Tachycardia." },
+  { q: "Which structure is the primary pacemaker of the heart?", opts:["AV Node","Bundle of His","SA Node","Purkinje Fibers"], ans:2, exp:"SA Node in the right atrium fires at 60-100 bpm and is the primary pacemaker." },
+  { q: "The Mitral valve has how many cusps?", opts:["1","2","3","4"], ans:1, exp:"Mitral (Bicuspid) valve = 2 cusps. All other heart valves have 3 cusps." },
+  { q: "Cardiac Output = ?", opts:["BP × HR","HR × Stroke Volume","SV × Preload","HR × EF"], ans:1, exp:"CO = Heart Rate × Stroke Volume. Normal ≈ 5 L/min (70 bpm × 70 mL)." },
+  { q: "S1 heart sound is caused by closure of:", opts:["Aortic and Pulmonary valves","Mitral and Tricuspid valves","Mitral and Aortic valves","All four valves"], ans:1, exp:"S1 (Lub) = closure of AV valves (Mitral + Tricuspid) at the START of systole." },
+  { q: "ST elevation on ECG most likely indicates:", opts:["Normal variant","Heart Failure","Acute MI (STEMI)","Bundle Branch Block"], ans:2, exp:"ST elevation = Acute Myocardial Infarction (STEMI). Needs immediate treatment!" },
+  { q: "Which side of the heart pumps blood to the LUNGS?", opts:["Left side","Right side","Both sides equally","Neither"], ans:1, exp:"Right side pumps DEOXYGENATED blood to lungs for oxygenation (pulmonary circuit)." },
+  { q: "The QRS complex on ECG represents:", opts:["Atrial depolarization","Ventricular repolarization","Ventricular depolarization","AV node delay"], ans:2, exp:"QRS = Ventricular depolarization. The electrical event causing ventricles to CONTRACT." },
+  { q: "Normal ejection fraction (EF) is:", opts:["25–40%","40–55%","55–70%","70–90%"], ans:2, exp:"Normal EF = 55–70%. EF < 40% indicates systolic heart failure." },
+  { q: "Frank-Starling Law states that:", opts:["More heart rate = more output","Greater stretch → greater force of contraction","Less afterload = less SV","Sympathetics decrease CO"], ans:1, exp:"Frank-Starling: More preload (stretch) → more force of contraction → more stroke volume." },
+  { q: "P wave on ECG represents:", opts:["Ventricular depolarization","Atrial repolarization","Atrial depolarization","AV delay"], ans:2, exp:"P wave = Atrial depolarization. SA node fires → electrical wave spreads through atria." },
+  { q: "Which neurotransmitter mediates parasympathetic effects on the heart?", opts:["Noradrenaline","Dopamine","Acetylcholine","Serotonin"], ans:2, exp:"Acetylcholine (via Vagus nerve) → ↓ HR, ↓ conduction. Noradrenaline is sympathetic." },
+  { q: "Aortic valve is best auscultated at:", opts:["Apex (5th ICS MCL)","2nd Right ICS RSB","4th ICS LSB","2nd Left ICS LSB"], ans:1, exp:"Aortic valve → 2nd Right Intercostal Space, Right Sternal Border (RSB)." },
+  { q: "S3 gallop in adults is most associated with:", opts:["Normal finding","Aortic Stenosis","Congestive Heart Failure","Hypertension"], ans:2, exp:"S3 in adults = ventricular gallop → indicates dilated/failing ventricle = Heart Failure." },
+  { q: "Which veins carry oxygenated blood?", opts:["Superior Vena Cava","Pulmonary Veins","Inferior Vena Cava","Portal Vein"], ans:1, exp:"Pulmonary VEINS carry oxygenated blood from lungs to the Left Atrium — unique exception to the artery/vein rule!" },
+];
+
+let answered = new Array(quizData.length).fill(false);
+
+function buildQuiz() {
+  const container = document.getElementById('quiz-container');
+  container.innerHTML = '';
+  answered.fill(false);
+  document.getElementById('quiz-score').style.display = 'none';
+  document.getElementById('submit-btn').style.display = 'inline-block';
+
+  quizData.forEach((q, qi) => {
+    const block = document.createElement('div');
+    block.className = 'q-block';
+    block.id = `q-${qi}`;
+    const letters = ['A','B','C','D'];
+    block.innerHTML = `
+      <div class="q-num">Question ${qi+1} of ${quizData.length}</div>
+      <div class="q-text">${q.q}</div>
+      <div class="options" id="opts-${qi}">
+        ${q.opts.map((o,oi) => `
+          <div class="opt" id="opt-${qi}-${oi}" onclick="selectAnswer(${qi},${oi})">
+            <span class="opt-letter">${letters[oi]}</span>
+            <span>${o}</span>
+          </div>`).join('')}
+      </div>
+      <div class="explanation" id="exp-${qi}">💡 ${q.exp}</div>`;
+    container.appendChild(block);
+  });
+}
+
+function selectAnswer(qi, oi) {
+  if(answered[qi]) return;
+  answered[qi] = true;
+  const correct = quizData[qi].ans;
+  const opts = document.querySelectorAll(`#opts-${qi} .opt`);
+  opts.forEach((o,i) => {
+    o.classList.add('disabled');
+    if(i === correct) o.classList.add('correct');
+    if(i === oi && oi !== correct) o.classList.add('wrong');
+  });
+  document.getElementById(`exp-${qi}`).classList.add('show');
+}
+
+function submitQuiz() {
+  // Auto-answer any unanswered
+  quizData.forEach((_,qi) => {
+    if(!answered[qi]) { answered[qi] = true; /* mark as skipped */ }
+  });
+
+  let score = 0;
+  answered.forEach((_,qi) => {
+    const optEls = document.querySelectorAll(`#opts-${qi} .opt`);
+    optEls.forEach((o,i) => {
+      if(o.classList.contains('correct')) score++;
+    });
+  });
+
+  // Count correct from DOM
+  score = document.querySelectorAll('.opt.correct').length;
+
+  const scoreBox = document.getElementById('quiz-score');
+  document.getElementById('score-display').textContent = `${score}/${quizData.length}`;
+  const pct = Math.round(score/quizData.length*100);
+  let msg = '';
+  if(pct >= 90) msg = '🏆 Outstanding! You are ready for exams!';
+  else if(pct >= 70) msg = '👏 Great job! Revise a few more times.';
+  else if(pct >= 50) msg = '📖 Good effort! Review the topics and retry.';
+  else msg = '💪 Keep studying! You\'ll get there. Revisit the content above.';
+  document.getElementById('score-msg').textContent = msg;
+  scoreBox.style.display = 'block';
+  document.getElementById('submit-btn').style.display = 'none';
+  scoreBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function resetQuiz() {
+  buildQuiz();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+buildQuiz();
+</script>
+</body>
+</html>
